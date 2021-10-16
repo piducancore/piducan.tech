@@ -1,4 +1,5 @@
-import React from "react";
+/** @jsx jsx */
+import { jsx, Themed, Button } from "theme-ui";
 
 export default function IndexPage() {
   const handleClick = async (event) => {
@@ -12,11 +13,11 @@ export default function IndexPage() {
     }
   };
   return (
-    <h1>
-      hello world{" "}
-      <span style={{ cursor: "pointer" }} onClick={handleClick}>
-        🤑
-      </span>
-    </h1>
+    <div sx={{ height: "100vh", display: "flex" }}>
+      <div sx={{ m: "auto", textAlign: "center" }}>
+        <Themed.h1>Webpay Plus integration demo</Themed.h1>
+        <Button onClick={handleClick}>Pay me 🤑</Button>
+      </div>
+    </div>
   );
 }
