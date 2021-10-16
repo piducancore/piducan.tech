@@ -6,6 +6,7 @@
   "author": "piducancore:/# <hola@piducan.dev>",
   "license": "MIT",
   "dependencies": {
+    "@theme-ui/presets": "^0.11.3",
     "gatsby": "^3.12.1",
     "gatsby-plugin-theme-ui": "^0.11.1",
     "react": "^17.0.2",
