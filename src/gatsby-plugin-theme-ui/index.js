@@ -1,4 +1,4 @@
-export default {
+const theme = {
   config: {
     useCustomProperties: true,
     initialColorMode: "light",
@@ -55,3 +55,5 @@ export default {
     },
   },
 };
+
+export default theme;
