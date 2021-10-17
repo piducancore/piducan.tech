@@ -13,7 +13,7 @@ export default function IndexPage() {
     }
   };
   return (
-    <div sx={{ height: "100vh", display: "flex" }}>
+    <div sx={{ height: "100vh", display: "flex", p: 3 }}>
       <div sx={{ m: "auto", textAlign: "center" }}>
         <Themed.h1>Webpay Plus integration demo</Themed.h1>
         <Button onClick={handleClick}>Pay me 🤑</Button>
