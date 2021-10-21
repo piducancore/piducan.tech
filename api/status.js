@@ -7,9 +7,14 @@ if (process.env.WPP_CC && process.env.WPP_KEY) {
 }
 
 module.exports = async (req, res) => {
-  let token = req.body.token;
+  let token = req.cookies.token;
 
-  const statusResponse = await WebpayPlus.Transaction.status(token);
-
-  res.json({ token, statusResponse });
+  if (token) {
+    const statusResponse = await WebpayPlus.Transaction.status(token);
+    res.json({ token, statusResponse });
+  } else {
+    res.status(301);
+    res.setHeader("Location", `/`);
+    res.end();
+  }
 };

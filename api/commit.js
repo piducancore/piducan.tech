@@ -1,4 +1,5 @@
 const WebpayPlus = require("transbank-sdk").WebpayPlus;
+const { serialize } = require("cookie");
 
 if (process.env.WPP_CC && process.env.WPP_KEY) {
   WebpayPlus.configureForProduction(process.env.WPP_CC, process.env.WPP_KEY);
@@ -9,17 +10,12 @@ if (process.env.WPP_CC && process.env.WPP_KEY) {
 module.exports = async (req, res) => {
   let token = req.body.token_ws;
 
-  if (token) {
-    const commitResponse = await WebpayPlus.Transaction.commit(token);
-    // res.json({ token, commitResponse });
-    const { response_code, status } = commitResponse;
-    const success = response_code === 0 && status === "AUTHORIZED";
-    res.status(301);
-    res.setHeader("Location", success ? "/success" : "/fail");
-    res.end();
-  } else {
-    res.status(301);
-    res.setHeader("Location", "/fail");
-    res.end();
-  }
+  const commitResponse = await WebpayPlus.Transaction.commit(token);
+
+  console.log({ token, commitResponse });
+
+  res.status(301);
+  res.setHeader("Set-Cookie", serialize("token", token, { httpOnly: true, secure: true }));
+  res.setHeader("Location", `/result`);
+  res.end();
 };
