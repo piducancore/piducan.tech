@@ -6,9 +6,13 @@
   "author": "piducancore:/# <hola@piducan.dev>",
   "license": "MIT",
   "dependencies": {
+    "@fontsource/major-mono-display": "^4.5.0",
+    "@fontsource/source-code-pro": "^4.5.0",
     "@theme-ui/presets": "^0.11.3",
+    "cookie": "^0.4.1",
     "gatsby": "^3.14.3",
     "gatsby-plugin-theme-ui": "^0.11.3",
+    "nodemailer": "^6.7.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "theme-ui": "^0.11.3",
