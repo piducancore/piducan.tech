@@ -1,15 +1,28 @@
-const WebpayPlus = require("transbank-sdk").WebpayPlus;
+const { WebpayPlus } = require("transbank-sdk");
 
 if (process.env.WPP_CC && process.env.WPP_KEY) {
   WebpayPlus.configureForProduction(process.env.WPP_CC, process.env.WPP_KEY);
 } else {
-  WebpayPlus.configureWebpayPlusForTesting();
+  WebpayPlus.configureForTesting();
 }
 
-module.exports = async (req, res) => {
-  let { token, amount } = req.body;
+module.exports = async function (request, response, next) {
+  let { token, amount } = request.body;
 
-  const refundResponse = await WebpayPlus.Transaction.refund(token, amount);
+  const refundResponse = await new WebpayPlus.Transaction().refund(token, amount);
 
-  res.json({ token, amount, refundResponse });
+  let viewData = {
+    token,
+    amount,
+    refundResponse,
+  };
+
+  console.log("webpay_plus/refund", {
+    step: "Reembolso de Transacción",
+    stepDescription:
+      "Podrás pedir el reembolso del dinero al tarjeta habiente, dependiendo del monto " +
+      "y el tiempo transacurrido será una Reversa, Anulación o Anulación parcial.",
+    viewData,
+  });
+  response.json(viewData);
 };
