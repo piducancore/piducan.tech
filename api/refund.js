@@ -7,7 +7,7 @@ if (process.env.WPP_CC && process.env.WPP_KEY) {
 }
 
 module.exports = async function (request, response, next) {
-  let { token, amount } = request.body;
+  let { token, amount } = request.query;
 
   const refundResponse = await new WebpayPlus.Transaction().refund(token, amount);
 
@@ -17,7 +17,7 @@ module.exports = async function (request, response, next) {
     refundResponse,
   };
 
-  console.log("webpay_plus/refund", {
+  console.log("api/refund", {
     step: "Reembolso de Transacción",
     stepDescription:
       "Podrás pedir el reembolso del dinero al tarjeta habiente, dependiendo del monto " +
