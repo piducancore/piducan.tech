@@ -1,0 +1,8 @@
+{
+    "rewrites": [
+        {
+            "source": "/result/:match*",
+            "destination": "/result"
+        }
+    ]
+}
